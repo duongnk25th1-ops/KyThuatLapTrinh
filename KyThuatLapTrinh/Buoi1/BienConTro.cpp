@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <vector> 
 using namespace std;
 struct SinhVien {
@@ -28,3 +28,4 @@ int main() {
 		cout << "\t+ Tuoi: " << mang[i].tuoi << endl;
 	}
 }
+*/
