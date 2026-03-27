@@ -59,8 +59,18 @@ bool FindPerson(vector<Person> p, string name) {
 		}
 	}
 }
+
+void ExportToFile(vector<Person>p, string fileName) {
+	ofstream file(fileName, ios::binary);
+	if (!file) {
+		cout << "Can't open this file" << endl;
+		return;
+	}
+}
+void ReadFromFile(vector<Person>)
+
 int main() {
-	vector list;
+	vector<Person> list;
 	do {
 		system("cls");
 		cout << "--- HUMAN RESOURCE --------" << endl;
@@ -107,7 +117,7 @@ int main() {
 		}
 		case 5: {
 			ExportToFile(list, "25TH1.dla");
-			cout << "Expert successfully" << endl:
+			cout << "Expert successfully" << endl;
 			break;
 		}
 		case 6: {

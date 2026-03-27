@@ -5,11 +5,26 @@ using namespace std;
 struct Person {
 	int id;
 	string name;
+	friend ostream& operator <<(ostream& os, const Person& p) {
+		os << "\t+ Id: " << p.id << endl;
+		os << "\t+ Name: " << p.name << endl;
+		return os;
+	}
+	friend istream& operator >>(istream& in, Person& p) {
+		cout << "Input person information:" << endl;
+		cout << "\t+ Id: ";
+		in >> p.id;
+		cout << "\t+ Name: ";
+		in.ignore();
+		getline(in, p.name);
+		return in;
+	}
 };
 
 struct Node {
 	Person data;
 	Node* next;
+	Node(Person x) : data(x), next(nullptr) {}
 };
 
 struct LinkedList {
@@ -44,11 +59,14 @@ struct LinkedList {
 				switch (cmd)
 				{
 				case 1: {
-
+					list.Show();
 					break;
 				}
 				case 2: {
-
+					Person a;
+					cin >> a;
+					list.Add(a);
+					cout << "Add a person successfully!" << endl;
 					break;
 				}
 				case 3: {
