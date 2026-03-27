@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 using namespace std;
 
 struct Person {
@@ -51,8 +52,15 @@ void RemovePerson(vector<Person>& p, int id) {
 	cout << "Not found person with id: " << id << endl;
 }
 
+bool FindPerson(vector<Person> p, string name) {
+	for (Person i : p) {
+		if (i.name == name) {
+			return true;
+		}
+	}
+}
 int main() {
-	vector<Person> list;
+	vector list;
 	do {
 		system("cls");
 		cout << "--- HUMAN RESOURCE --------" << endl;
@@ -85,12 +93,26 @@ int main() {
 			break;
 		}
 		case 4: {
+			string name;
+			cout << "Input Name to find: ";
+			cin.ignore();
+			getline(cin, name);
+			bool res = FindPerson(list, name);
+			if (res) {
+				cout << "Found person with name " << endl;
+			}
+			else
+				cout << "Person isn't existed" << endl;
 			break;
 		}
 		case 5: {
+			ExportToFile(list, "25TH1.dla");
+			cout << "Expert successfully" << endl:
 			break;
 		}
 		case 6: {
+			ReadFormFile(list, "25TH1.dla"_);
+			cout << "Import successfully" << endl;
 			break;
 		}
 		case 0: {
