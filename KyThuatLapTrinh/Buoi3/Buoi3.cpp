@@ -79,6 +79,7 @@ int main()
         cout << "5. Find book" << endl;
         cout << "6. Export to file" << endl;
         cout << "7. Import to file" << endl;
+        cout << "0. Exit" << endl;
         cout << "---------------------------------" << endl;
         cout << "Enter your choice: ";
         int choice;
@@ -119,6 +120,7 @@ int main()
             cout << "Invalid choice, try again" << endl;
             break;
         }
-
+        system("pause");
+        cout << "Press any key to continue...";
     } while (true);
 }
