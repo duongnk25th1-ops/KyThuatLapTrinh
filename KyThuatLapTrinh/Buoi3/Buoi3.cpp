@@ -132,7 +132,7 @@ struct LinkedList {
             out.write(reinterpret_cast<const char*>(&namelength), sizeof(namelength));
             out.write(item->data.name.c_str(), namelength);
 
-            out.write(reinterpret_cast<const char*>(item->data.author.id), sizeof(item->data.author.id));
+            out.write(reinterpret_cast<const char*>(&item->data.author.id), sizeof(item->data.author.id));
 
             size_t authornamelength = item->data.author.name.size();
             out.write(reinterpret_cast<const char*>(&authornamelength), sizeof(authornamelength));
@@ -141,6 +141,39 @@ struct LinkedList {
             item = item->next;
         }
         out.close();
+    }
+    void Import(string filename) {
+        ifstream in(filename, ios::binary);
+        if (!in.is_open()) {
+            cout << "Cannot open file" << endl;
+            return;
+        }
+        while (head != NULL) {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+        while (in.peek() != EOF) {
+            Book b;
+            in.read(reinterpret_cast<char*>(&b.id), sizeof(b.id));
+
+            size_t namelength;
+            in.read(reinterpret_cast<char*>(&namelength), sizeof(namelength));
+            b.name.resize(namelength);
+            in.read(&b.name[0], namelength);
+
+            in.read(reinterpret_cast<char*>(&b.author.id), sizeof(b.author.id));
+
+            size_t authornamelength;
+            in.read(reinterpret_cast<char*>(&authornamelength), sizeof(authornamelength));
+            b.author.name.resize(authornamelength);
+            in.read(&b.author.name[0], authornamelength);
+
+            Node* newNode = new Node;
+            newNode->Create(b);
+            AddFirst(newNode);
+        }
+        in.close();
     }
 };
 
@@ -213,11 +246,13 @@ int main()
             break;
         }
         case 6: {
-            books.Export("25TH1.dla");
+            books.Export("NKD.25TH1");
             cout << "Exported successfully" << endl;
             break;
         }
           case 7: {
+              books.Import("NKD.25TH1");
+              cout << "Imported successfully" << endl;
             break;
         }
         case 0: {
