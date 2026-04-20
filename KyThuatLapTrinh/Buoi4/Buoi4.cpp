@@ -1,6 +1,7 @@
 #include <iostream>
 #include"Account.h"
 #include"Linkedlist.h"
+#include <string>
 int main()
 {
 
@@ -62,11 +63,13 @@ int main()
 			break;
 		}
 		case 6: {
-
+			accounts.Export("25TH1.vn");
+			cout << "Exported successfully" << endl;
 			break;
 		}
 		case 7: {
-
+			accounts.Import("25TH1.vn");
+			cout << "Imported successfully" << endl;
 			break;
 		}
 		case 0: {
